@@ -1,32 +1,34 @@
 ﻿namespace WebApplicationMvc.Controllers;
+
 using System.Diagnostics;
 
 using Microsoft.AspNetCore.Mvc;
 
 using WebApplicationMvc.Models;
+using WebApplicationMvc.Services;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly ILogger<HomeController> logger;
 
-    public HomeController(ILogger<HomeController> logger)
+    private readonly AddressesApiService addressesApiService;
+
+    public HomeController(ILogger<HomeController> logger, AddressesApiService addressesApiService)
     {
-        _logger = logger;
+        this.logger = logger;
+        this.addressesApiService = addressesApiService;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {
-        return View();
+        var addresses = await this.addressesApiService.GetAllAdresses(cancellationToken);
+        return this.View(addresses);
     }
 
     public IActionResult Privacy()
-    {
-        return View();
-    }
+        => this.View();
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
+        => this.View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
 }
