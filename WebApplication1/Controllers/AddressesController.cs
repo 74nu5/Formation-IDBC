@@ -53,7 +53,6 @@ public class AddressesController : ControllerBase
 
     // DELETE api/<AddressesController>/5
     [HttpDelete("{id}")]
-    public void Delete(int id)
-    {
-    }
+    public async Task Delete(int id, CancellationToken cancellationToken) 
+        => await this.addressAccessLayer.RemoveAsync(id, cancellationToken);
 }

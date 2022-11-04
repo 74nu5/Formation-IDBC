@@ -1,41 +1,37 @@
 ﻿@page "/fetchdata"
 
-<PageTitle>Weather forecast</PageTitle>
+<PageTitle>Addresses</PageTitle>
 
 @using BlazorApp1.Data
-@inject WeatherForecastService ForecastService
+@using BlazorApp1.Pages.Components
+
 
 <h1>Weather forecast</h1>
 
 <p>This component demonstrates fetching data from a service.</p>
 
-@if (forecasts == null)
+@if (this.errorDelete is false)
+{
+    <div class="alert alert-danger">Erreur lors de la suppression...</div>
+}
+
+@if (this.errorDelete is true)
+{
+    <div class="alert alert-success">Suppression réussie...</div>
+}
+
+@if (this.addresses == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var forecast in forecasts)
-            {
-                <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <p>Listes des adresses..</p>
+    @foreach (var address in this.addresses)
+    {
+        <AddressDisplay Address="address" DeleteCallback="this.DeleteAddressAsync" />
+    }
+
 }
 
 

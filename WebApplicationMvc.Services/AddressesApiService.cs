@@ -2,9 +2,9 @@
 
 using System.Net.Http.Json;
 
-using Data.Models;
-
 using Microsoft.Extensions.Logging;
+
+using WebApplicationMvc.Models;
 
 public class AddressesApiService
 {
@@ -31,4 +31,6 @@ public class AddressesApiService
             return new List<Address>();
         }
     }
+
+
 }

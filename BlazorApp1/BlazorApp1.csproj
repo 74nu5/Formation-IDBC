@@ -1,13 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PublishReadyToRun>true</PublishReadyToRun>  </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WebApplicationMvc.Services\WebApplicationMvc.Services.csproj" />
+    <ProjectReference Include="..\BlazorApp.Services\BlazorApp.Services.csproj" />
+    <ProjectReference Include="..\WebApplicationMvc.Models\WebApplicationMvc.Models.csproj" />
   </ItemGroup>
 
 </Project>

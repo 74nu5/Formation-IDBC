@@ -18,24 +18,8 @@
 
             await Parallel(nombreTestsMax, urlToTest);
             await Sequenciel(nombreTestsMax, httpClient, urlToTest);
-
-
-
-            var range = Enumerable.Range(1, 50).ToArray();
-
-            var range2 = 5..^2;
-
-
-
-            var r = new ResponseObject(true, "TOTO", Array.Empty<string>());
-
-            var (s, r_, _) = r;
-
-
-
             _ = Console.ReadLine();
         }
-
 
         private static async Task Sequenciel(int nombreTestsMax, HttpClient httpClient, string urlToTest)
         {
@@ -80,6 +64,4 @@
             Console.WriteLine($"Moyenne d'appel : {results.Average()} ms");
         }
     }
-
-    public record ResponseObject(bool success, string? response, string[] errorMessages);
 }
